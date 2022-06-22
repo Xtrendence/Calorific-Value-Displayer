@@ -33,13 +33,13 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 
 	buttonPrevious.addEventListener("click", () => {
-		divChartWrapper.innerHTML = "<span>Loading...</span>";
-		divTableWrapper.innerHTML = "<span>Loading...</span>";
-
 		let currentFrom = parseInt(divChartWrapper.getAttribute("data-from"));
 		let currentTo = parseInt(divChartWrapper.getAttribute("data-to"));
 
 		if(currentFrom - 100 >= 0) {
+			divChartWrapper.innerHTML = "<span>Loading...</span>";
+			divTableWrapper.innerHTML = "<span>Loading...</span>";
+
 			displayData(currentFrom - 100, currentTo - 100);
 		}
 	});
