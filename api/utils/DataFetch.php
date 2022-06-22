@@ -1,4 +1,7 @@
 <?php
+	include_once("../utils/DB.php");
+	include_once("../models/CalorificValue.php");
+
 	class DataFetch 
 	{
 		private $dateFrom;
@@ -52,29 +55,48 @@
 
 		public function parse($csv) 
 		{
-			include_once("../models/CalorificValue.php");
-
 			$data = [];
 
 			$lines = explode("\n", $csv);
 			array_shift($lines);
 
 			foreach($lines as $line) {
-				$parts = explode('","', $line);
-				$applicableFor = $parts[1];
-				$dataItem = $parts[2];
-				$value = $parts[3];
-				$area = str_replace("Calorific Value, ", "", $dataItem);
+				try 
+				{
+					$parts = explode('","', $line);
+					$applicableFor = $parts[1];
+					$dataItem = $parts[2];
+					$value = $parts[3];
+					$area = str_replace("Calorific Value, ", "", $dataItem);
 
-				array_push($data, new CalorificValue($applicableFor, $value, $area));
+					array_push($data, new CalorificValue($applicableFor, $value, $area));
+				} 
+				catch(Exception $e) 
+				{
+					continue;
+				}
 			}
 
 			return $data;
 		}
 
-		public function store($data) 
+		public function store($rows) 
 		{
+			$db = new DB("../db/db.sqlite");
+			$connection = $db->connect();
 
+			for($i = 0; $i < count($rows); $i++)
+			{
+				$row = (array) $rows[$i];
+				$area = $row["area"];
+
+				if(!empty($area))
+				{
+					$statement = $connection->prepare('INSERT INTO Area (area) VALUES (:area)');
+					$statement->bindParam(":area", $row["area"]);
+					$statement->execute();
+				}
+			}
 		}
 	}
 ?>
