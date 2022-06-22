@@ -88,13 +88,36 @@
 			for($i = 0; $i < count($rows); $i++)
 			{
 				$row = (array) $rows[$i];
+
 				$area = $row["area"];
+				$applicableFor = $row["applicableFor"];
+				$calorificValue = $row["value"];
 
 				if(!empty($area))
 				{
 					$statement = $connection->prepare('INSERT INTO Area (area) VALUES (:area)');
 					$statement->bindParam(":area", $row["area"]);
 					$statement->execute();
+
+					$statement = $connection->prepare('SELECT areaID FROM Area WHERE area=:area');
+					$statement->bindParam(":area", $row["area"]);
+					$result = $statement->execute();
+					$areaID = $result->fetchArray()[0];
+
+					$statement = $connection->prepare('SELECT valueID FROM [Value] WHERE areaID=:areaID AND applicableFor=:applicableFor AND calorificValue=:calorificValue');
+					$statement->bindParam(":areaID", $areaID);
+					$statement->bindParam(":applicableFor", $applicableFor);
+					$statement->bindParam(":calorificValue", $calorificValue);
+					$result = $statement->execute();
+					
+					if(empty($result->fetchArray()))
+					{
+						$statement = $connection->prepare('INSERT INTO [Value] (areaID, applicableFor, calorificValue) VALUES (:areaID, :applicableFor, :calorificValue)');
+						$statement->bindParam(":areaID", $areaID);
+						$statement->bindParam(":applicableFor", $applicableFor);
+						$statement->bindParam(":calorificValue", $calorificValue);
+						$statement->execute();
+					}
 				}
 			}
 		}

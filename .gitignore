@@ -1,2 +1,3 @@
 .DS_Store
 api/data/data.csv
+api/db/db.sqlite
