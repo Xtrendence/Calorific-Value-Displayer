@@ -53,6 +53,26 @@
 			return $result;
 		}
 
+		public function fetchFromDB($rangeFrom, $rangeTo)
+		{
+			$db = new DB("../db/db.sqlite");
+			$connection = $db->connect();
+
+			$statement = $connection->prepare('SELECT [Value].valueID, [Value].areaID, [Value].applicableFor, [Value].calorificValue, Area.area FROM [Value] LEFT JOIN Area ON Area.areaID = [Value].areaID WHERE [Value].valueID BETWEEN :rangeFrom AND :rangeTo LIMIT 100');
+			$statement->bindParam(":rangeFrom", $rangeFrom);
+			$statement->bindParam(":rangeTo", $rangeTo);
+			$result = $statement->execute();
+
+			$rows = [];
+
+			while($row = $result->fetchArray(SQLITE3_ASSOC)) 
+			{
+				array_push($rows, $row);
+			}
+
+			return $rows;
+		}
+
 		public function parse($csv) 
 		{
 			$data = [];
