@@ -11,6 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
 	let buttonPrevious = document.getElementById("button-previous");
 	let buttonNext = document.getElementById("button-next");
 
+	let inputFrom = document.getElementById("input-from");
+	let inputTo = document.getElementById("input-to");
+
+	let buttonAverage = document.getElementById("button-average");
+
 	displayData(0, 99);
 
 	buttonViewChart.addEventListener("click", () => {
@@ -48,6 +53,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		displayData(currentFrom + 100, currentTo + 100);
 	});
+
+	buttonAverage.addEventListener("click", async () => {
+		let from = inputFrom.value;
+		let to = inputTo.value;
+
+		buttonAverage.innerText = "Loading...";
+
+		let data = await fetchDataByDate(from, to);
+
+		let values = [];
+		data.map(item => {
+			values.push(item?.calorificValue);
+		});
+
+		window.alert(`Average: ${average(values).toFixed(3)}`);
+
+		buttonAverage.innerText = "Calculate Average";
+	});
+
+	const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
 
 	async function displayData(from, to) {
 		let data = await fetchData(from, to);
@@ -150,6 +175,26 @@ document.addEventListener("DOMContentLoaded", () => {
 			});
 
 			xhr.open("GET", `../api/data/read.php?from=${from}&to=${to}`, true);
+			xhr.send();
+		});
+	}
+
+	function fetchDataByDate(from, to) {
+		return new Promise((resolve, reject) => {
+			let xhr = new XMLHttpRequest();
+
+			xhr.addEventListener("readystatechange", () => {
+				if(xhr.readyState === XMLHttpRequest.DONE) {
+					if(validJSON(xhr.responseText)) {
+						resolve(JSON.parse(xhr.responseText));
+						return;
+					}
+
+					reject("Invalid JSON response.");
+				}
+			});
+
+			xhr.open("GET", `../api/data/read-date.php?from=${from}&to=${to}`, true);
 			xhr.send();
 		});
 	}
