@@ -16,4 +16,28 @@
 		<meta charset="UTF-8">
 		<title>Calorific Value Displayer</title>
 	</head>
+	<body>
+		<div class="navbar">
+			<img src="./assets/img/favicon/Icon.png"/>
+			<span>Calorific Value Displayer</span>
+			<button class="app-button active" id="button-view-chart">View Chart</button>
+			<button class="app-button" id="button-view-table">View Table</button>
+		</div>
+		<div class="app">
+			<button class="app-button" id="button-previous">Previous 100</button>
+			<button class="app-button" id="button-next">Next 100</button>
+			<div id="container-chart">
+				<div id="chart-wrapper" data-from="0" data-to="99" class="chart-wrapper">
+					<span>Loading...</span>
+				</div>
+			</div>
+			<div id="container-table" class="hidden">
+				<div id="table-wrapper" class="table-wrapper">
+					<span>Loading...</span>
+				</div>
+			</div>
+		</div>
+		<script src="./assets/js/chart.js"></script>
+		<script src="./assets/js/main.js"></script>
+	</body>
 </html>

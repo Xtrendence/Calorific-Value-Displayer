@@ -1,0 +1,129 @@
+html, body, button, input, textarea {
+	font-family:var(--font-family);
+}
+
+body {
+	margin:0;
+	background:var(--main-second);
+	color:var(--main-contrast);
+	padding:0;
+	font-size:0;
+	overflow:hidden;
+}
+input, button {
+	outline:none;
+	border:none;
+}
+button {
+	cursor:pointer;
+	transition:background 0.25s;
+}
+html, body, textarea, input, div {
+	transition:background 0.25s;
+}
+a {
+	text-decoration:none;
+	color:var(--accent-first);
+}
+.clickable {
+	cursor:pointer !important;
+}
+.noselect {
+	-webkit-user-select:none !important;
+	-khtml-user-select:none !important;
+	-moz-user-select:none !important;
+	-ms-user-select:none !important;
+	user-select:none !important;
+	outline:none !important;
+}
+.hidden {
+	display:none !important;
+	visibility:hidden !important;
+	position:absolute !important;
+	z-index:-1 !important;
+}
+.uppercase {
+	text-transform:uppercase !important;
+}
+
+::-webkit-scrollbar, div::-webkit-scrollbar {
+	display:block;
+	width:4px;
+	height:6px;
+	background:var(--main-fifth);
+	border-radius:5px;
+}
+::-webkit-scrollbar-thumb, div::-webkit-scrollbar-thumb {
+	border-radius:5px;
+	background:var(--main-contrast);
+}
+::-webkit-scrollbar-thumb:hover, div::-webkit-scrollbar-thumb:hover {
+	background:var(--accent-first);
+}
+::-webkit-scrollbar-track, div::-webkit-scrollbar-track { 
+	background:var(--main-first);
+	border-radius:5px;
+}
+
+.navbar {
+	box-shadow:var(--shadow-smooth);
+	border-radius:var(--border-radius);
+	margin:20px 20px 0 20px;
+	background:var(--main-first);
+	position:relative;
+}
+.navbar img {
+	width:120px;
+	height:120px;
+	vertical-align:middle;
+	display:inline-block;
+}
+.navbar span {
+	font-size:28px;
+	color:var(--main-contrast);
+	font-weight:bold;
+	vertical-align:middle;
+	display:inline-block;
+	margin-left:10px;
+}
+.app {
+	padding:20px;
+	overflow:hidden auto;
+	height:calc(100vh - 20px - 140px - 20px);
+}
+
+.app-button {
+	width:120px;
+	height:40px;
+	background:var(--accent-first);
+	color:var(--accent-contrast);
+	border-radius:var(--border-radius);
+	font-weight:bold;
+	box-shadow:var(--shadow-smooth);
+}
+.navbar button {
+	position:absolute;
+	right:15px;
+}
+.navbar button:nth-of-type(1) {
+	top:15px;
+}
+.navbar button:nth-of-type(2) {
+	bottom:15px;
+}
+.app-button:hover, .app-button.active {
+	background:var(--accent-second);
+}
+
+#button-next {
+	margin-left:10px;
+}
+
+.chart-wrapper span, .table-wrapper span {
+	font-size:24px;
+	font-weight:bold;
+	color:var(--main-contrast);
+	text-align:center;
+	display:block;
+	margin:80px auto 0 auto;
+}
