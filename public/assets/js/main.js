@@ -113,7 +113,23 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	function generateTable(data) {
-		
+		divTableWrapper.innerHTML = `
+			<div class="row header">
+				<span class="applicable-for">Applicable For</span>
+				<span class="calorific-value">Calorific Value</span>
+				<span class="area">Area</span>
+			</div>
+		`;
+
+		data.map(row => {
+			divTableWrapper.innerHTML += `
+				<div class="row">
+					<span class="applicable-for">${row?.applicableFor}</span>
+					<span class="calorific-value">${row?.calorificValue}</span>
+					<span class="area">${row?.area}</span>
+				</div>
+			`;
+		});
 	}
 
 	function fetchData(from, to) {

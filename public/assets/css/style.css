@@ -87,6 +87,7 @@ a {
 	margin-left:10px;
 }
 .app {
+	position:relative;
 	padding:20px;
 	overflow:hidden auto;
 	height:calc(100vh - 20px - 140px - 20px);
@@ -100,6 +101,7 @@ a {
 	border-radius:var(--border-radius);
 	font-weight:bold;
 	box-shadow:var(--shadow-smooth);
+	vertical-align:middle;
 }
 .navbar button {
 	position:absolute;
@@ -119,6 +121,31 @@ a {
 	margin-left:10px;
 }
 
+.average-wrapper {
+	position:absolute;
+	right:20px;
+	top:20px;
+}
+.average-wrapper button {
+	width:160px;
+}
+.average-wrapper input {
+	margin-right:10px;
+	vertical-align:middle;
+	width:160px;
+	height:40px;
+	padding:0 10px 0 10px;
+	background:var(--main-first);
+	color:var(--main-contrast);
+	border-radius:var(--border-radius);
+	font-weight:bold;
+	box-shadow:var(--shadow-smooth);
+}
+
+.chart-wrapper {
+	margin-top:20px;
+}
+
 .chart-wrapper span, .table-wrapper span {
 	font-size:24px;
 	font-weight:bold;
@@ -126,4 +153,27 @@ a {
 	text-align:center;
 	display:block;
 	margin:80px auto 0 auto;
+}
+
+.row {
+	background:var(--main-first);
+	margin-bottom:10px;
+	border-radius:var(--border-radius);
+	box-shadow:var(--shadow-smooth);
+	padding:10px 0 10px 0;
+}
+.row.header {
+	background:var(--main-third);
+	margin-top:20px;
+}
+.row.header span {
+	font-size:18px;
+	font-weight:bold;
+}
+.row span {
+	display:inline-block;
+	width:calc(100% / 3);
+	font-size:16px;
+	font-weight:normal;
+	margin:0;
 }
